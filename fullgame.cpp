@@ -9,14 +9,34 @@
 using namespace std;
 
 // Universal Values
-bool inMainMenu = true;
 bool continueGame = true;
-bool pause = false;
+bool gamePaused = false;
 char choiceKey;
 
-// Wait for Key
+// Dialogue Script
+void dialogueScript() {
+	vector<string> dialogue;
+	dialogue[0] = "\"Hey! Nami! erm... Umm...";
+}
+
+// Input Key
 void choice() {
     choiceKey = getch();
+}
+
+// Clear Input Key
+void clearKey() {
+	choiceKey = '\0';
+}
+
+// Clear Lines
+void clearLines() {
+	system("cls");
+}
+
+// Wait for Key Press
+void pressKey() {
+	system("pause");
 }
 
 // Player Details
@@ -37,7 +57,7 @@ int bossEND = 600;
 
 // Disclaimer
 void warningScreen() {
-    cout << endl;
+	cout << endl;
     cout << "           D I S C L A I M E R          " << endl;
     cout << endl;
     cout << " This is a work of fiction. Any of the  " << endl;
@@ -52,8 +72,8 @@ void warningScreen() {
     cout << endl;
     cout << "  Viewer Discretion is Advised. (18+)   " << endl;
     cout << endl;
-    system("pause");
-    system("cls");
+    pressKey();
+    clearLines();
 }
 
 // Introduction
@@ -64,19 +84,13 @@ void introScreen() {
 	cout << "     in East Blue with the Eight Gates    " << endl;
 	cout << endl;	
 	cout << endl;
-	system("pause");
-	system("cls");
+	pressKey();
+	clearLines();
 }
 
 // All Scenes
 void sceneView() {
 	
-}
-
-// All Dialogues
-void dialogueScript() {
-	vector<string> dialogue;
-	dialogue[0] = "\"Hey! Nami! erm... Umm...";
 }
 
 // Dealing Boss Damage
@@ -105,13 +119,13 @@ void startScreen() {
     cout << endl;
     cout << setw(6) << "A project of Ateneo de Naga University" << setw(6) << endl;
     cout << endl;
-    system("pause");
-    system("cls");
+	pressKey();
+	clearLines();
 }
 
 // Exit Game
 void exitGame() {
-    cout << "----------------------------------------" << endl;
+	cout << "----------------------------------------" << endl;
     cout << "|                                      |" << endl;
     cout << "|    Are you sure you want to quit?    |" << endl;
     cout << "|                                      |" << endl;
@@ -121,44 +135,55 @@ void exitGame() {
     choice();
     if (choiceKey == 'y' || choiceKey == 'Y') {
         continueGame = false;
+        clearKey();
     }
 }
 
 // Game Paused
 void pauseGame() {
-    cout << "----------------------------------------" << endl;
-    cout << "|                                      |" << endl;
-    cout << "|             Game Paused!             |" << endl;
-    cout << "|                                      |" << endl;
-    cout << "|         Press C to Continue.         |" << endl;
-    cout << "|           Press Q to Quit.           |" << endl;
-    cout << "|                                      |" << endl;
-    cout << "----------------------------------------" << endl;
+    gamePaused = true;
+    while (gamePaused) {
+		cout << "----------------------------------------" << endl;
+	    cout << "|                                      |" << endl;
+	    cout << "|             Game Paused!             |" << endl;
+	    cout << "|                                      |" << endl;
+	    cout << "|      Press any key to Continue.      |" << endl;
+	    cout << "|           Press Q to Quit.           |" << endl;
+	    cout << "|                                      |" << endl;
+	    cout << "----------------------------------------" << endl;
+	    choice();
+	    if (choiceKey == 'q' || choiceKey == 'Q') {
+	    	clearKey();
+			exitGame();
+		}
+		else {
+			clearKey();
+			gamePaused = false;
+		}
+	}
+}
+
+// Play the Full Game
+void playGame() {
+   	clearKey();
+	clearLines();
+   	warningScreen();
+    introScreen();
 }
 
 // Main Menu
 void mainMenu() {
-    while (inMainMenu) {
-        cout << "----------------------------------------" << endl;
-        cout << "|                                      |" << endl;
-        cout << "|      \"Reborn\" In East Blue With      |" << endl;
-        cout << "|           The Eight Gates            |" << endl;
-        cout << "|                                      |" << endl;
-    	cout << "| A fanfic from the anime \"One Piece\"  |" << endl;
-    	cout << "|                                      |" << endl;
-        cout << "|    Press any key to start playing.   |" << endl;
-        cout << "|           Press Q to Quit.           |" << endl;
-        cout << "|                                      |" << endl;
-        cout << "----------------------------------------" << endl;
-        choice();
-        if (choiceKey == 'q' || choiceKey == 'Q') {
-            exitGame();
-        }
-        else {
-            warningScreen();
-            introScreen();
-        }
-    }
+    cout << "----------------------------------------" << endl;
+    cout << "|                                      |" << endl;
+    cout << "|      \"Reborn\" In East Blue With      |" << endl;
+    cout << "|           The Eight Gates            |" << endl;
+    cout << "|                                      |" << endl;
+	cout << "| A fanfic from the anime \"One Piece\"  |" << endl;
+	cout << "|                                      |" << endl;
+    cout << "|    Press any key to start playing.   |" << endl;
+    cout << "|           Press Q to Quit.           |" << endl;
+    cout << "|                                      |" << endl;
+    cout << "----------------------------------------" << endl;
 }
 
 // Game Flow
@@ -166,6 +191,13 @@ int main() {
     startScreen(); // Shows Startup Screen
     while (continueGame == true) {
         mainMenu(); // Shows Main Menu
+        choice();
+        if (choiceKey == 'q' || choiceKey == 'Q') {
+        	exitGame();
+		}
+		else {
+			playGame();
+		}
     }
     return 0;
 }
