@@ -19,7 +19,8 @@ bool gate2Active = false;
 bool gateMastery = false;
 bool playerInTurn = false;
 bool bossInTurn = false;
-
+bool canActivateGates = false;
+bool gateActivatedBefore = false;
 
 // Clear Lines
 void clearLines() {
@@ -65,10 +66,10 @@ int bossHP = 2500;
 int bossATK = 520;
 int bossEND = 600;
 
-// Dealing Boss Damage
-void dealBossDamage() {
-	bossDamage = ceil((playerATK - bossEND) / 2);
-	cout << "You deal " << bossDamage << " damage!" << endl;
+// When using Keigan Barrage
+void keiganBarrage() {
+	bossDamage = ceil((playerATK - (0.95 * bossEND)));
+	cout << "Total damage: " << bossDamage << endl;
 	bossHP -= bossDamage;
 	bossDamage = 0; // Reset Damage
 }
@@ -101,7 +102,7 @@ void loopTraining() {
 				clearLines();
 				break;
 			case 2:
-				playerATK = 11 + 2 * (i − 1);
+				playerATK = 11 + 2 * (i - 1);
 				cout << "Player ATK is now " << playerATK << endl;
 				cout << endl;
 				printLine();
@@ -109,7 +110,7 @@ void loopTraining() {
 				clearLines();
 				break;
 			case 3:
-				playerEND = 15 + 3 * (i − 1);
+				playerEND = 15 + 3 * (i - 1);
 				cout << "Player END is now " << playerEND << endl;
 				cout << endl;
 				printLine();
@@ -117,7 +118,7 @@ void loopTraining() {
 				clearLines();
 				break;
 			case 4:
-				playerEP = 15 + 3 * (i − 1);
+				playerEP = 15 + 3 * (i - 1);
 				cout << "Player EP is now " << playerEP << endl;
 				cout << endl;
 				printLine();
@@ -125,7 +126,7 @@ void loopTraining() {
 				clearLines();
 				break;
 			case 5:
-				playerREGENEP = 2.5 + 0.5 * (i − 1);
+				playerREGENEP = 2.5 + 0.5 * (i - 1);
 				cout << "Player ATK is now " << playerREGENEP << endl;
 				cout << endl;
 				printLine();
@@ -141,51 +142,20 @@ void loopTraining() {
 void playerTurn() {
 	playerInTurn = true;
 	while (playerInTurn) {
+		cout << "Choose your technique:" << endl;
+		cout << endl;
+		cout << "1. Chain Handling (Activate Lotus Series)" << endl;
+		cout << "2. Keigan Barrage (3 hits, each has 0.45 ATK, 5% less Boss Endurance; Lose 2 turns)" << endl;
+		cout << "3. Front Lotus \"Omote\" (Finisher, 5 hits, each has 0.95x ATK, 30% less Boss Endurance, requires Chains + Gate Activated + Barrage used last turn)" << endl;
+		cout << "4. Chain Barrage (3 hits, each has 1.25 ATK, 35% less Boss Endurance, 4 hits if Gate 2 is active, requires Gate On and Front Lotus used once, miss 5 turns)" << endl;
+		cout << "5. Gate Attack (Open Gate 1 (-35 EP, -7 after)/Gate 2 (-45 EP, -9 after, requires G1 mastery))" << endl;
 		pressChoice();
 	}
 }
 
 // Activating the Gates
 void activateGates() {
-	if (playerEP >= 1.5 * 35) {
-		gate1Active = true;
-		cout << "Gate 1 Activated!" << endl;
-		cout << "Your attacks deal 1.8 more damage!" << endl;
-		cout << "Do you want to unlock Gate 2?" << endl;
-		cout << "Y for Yes, N for No" << endl;
-		pressChoice();
-		if (choiceKey == 'Y' || choiceKey == 'y') {
-			if (playerEP >= 1.5 * 45) {
-				gate2Active = true;
-				playerEP -= 45;
-				cout << "Gate 2 Activated!" << endl;
-				playerATK *= 2.2;
-				cout << "Both gates are active! Your attacks now deal 2.2 more damage!" << endl;
-				dealBossDamage();
-				gateMastery = true;
-			}
-			else {
-				cout << "You don't have enough Energy Points!" << endl;
-			}
-		}
-		else if (choiceKey == 'N' || choiceKey == 'n') {
-			playerEP -= 35;
-			playerATK *= 1.8;
-			dealBossDamage();
-		}
-		if (!gateMastery && playerEP < 7) {
-			playerATK /= 1.5;
-			playerEND /= 1.5;
-		}
-		else if (gateMastery && playerEP < 8) {
-			playerATK /= 1.4;
-			playerEND /= 1.4;
-		}
-		playerInTurn = false;
-	}
-	else {
-		cout << "You don't have enough Energy Points!" << endl;
-	}
+	
 }
 
 // Boss Turn
@@ -221,7 +191,7 @@ void chapter1() {
 }
 
 // Story Settings
-string storySetting[2] = {"Cocoyashi Village", "Polar Tang"}
+string storySetting[2] = {"Cocoyashi Village", "Polar Tang"};
 
 // Player Information
 void playerInfo() {
@@ -231,7 +201,7 @@ void playerInfo() {
 	cout << "Age: 18" << endl;
 	cout << "Epithet: Jet" << endl;
 	cout << "Power Ranking: 3rd (behind Zoro and front of Sanji)" << endl;
-	cout << "Crew Position: Shinobi, Accountant" << storyPosition << endl;
+	cout << "Crew Position: Shinobi, Accountant" << endl;
 	cout << endl;
 	cout << "A former #1 college gymnast and cheerdancer, while also the best accountant for his company. Unfortunately, he died due to overwork, and was reincarnated in a place he had never seen before." << endl;
 	cout << endl;
@@ -379,7 +349,7 @@ int main() {
     startScreen(); // Shows Startup Screen
     while (continueGame == true) {
         mainMenu(); // Shows Main Menu
-        choice();
+        pressChoice();
         if (choiceKey == 'q' || choiceKey == 'Q') {
         	exitGame(); // Exit Game
 		}
