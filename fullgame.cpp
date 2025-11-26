@@ -10,7 +10,6 @@ using namespace std;
 
 // Universal Values
 bool continueGame = true;
-bool gamePaused = false;
 char choiceKey;
 int bossDamage = 0;
 int playerDamage = 0;
@@ -145,28 +144,76 @@ void chapter1() {
 	cout << endl;
 	cout << "The Cocoyashi Village is a place full of prosperity and peace in the world." << endl;
 	cout << "You lived there with your love, Nami." << endl;
-}
-
-// Story Settings
-string storySetting[2] = {"Cocoyashi Village", "Polar Tang"}
-
-// Player Information
-void playerInfo() {
+	cout << "You watched her draw her first map, and glance in front of her eyes." << endl;
 	cout << endl;
-	cout << "Full Name: Keigan Lee" << endl;
-	cout << "Nickname: Kei (only by the locals)" << endl;
-	cout << "Age: 18" << endl;
-	cout << "Epithet: Jet" << endl;
-	cout << "Power Ranking: 3rd (behind Zoro and front of Sanji)" << endl;
-	cout << "Crew Position: Shinobi, Accountant" << storyPosition << endl;
+	printLine();
 	cout << endl;
-	cout << "A former #1 college gymnast and cheerdancer, while also the best accountant for his company. Unfortunately, he died due to overwork, and was reincarnated in a place he had never seen before." << endl;
+	pressKey();
+	clearLines();
+	cout << "Location: " << storySetting[0] << endl;
+	cout << endl;
+	cout << "One of your best friends, Bell-mere, checking the budget and price of her delicious mikans." << endl;
+	cout << "When things get really rough, you cook extra tasty dishes inside her household, making Bell-mere eat this instead of mikans." << endl;
+	cout << "The low demand for mikan lasted for months, as time passes by." << endl;
+	cout << endl;
+	printLine();
+	cout << endl;
+	pressKey();
+	clearLines();
+	cout << "Location: " << storySetting[0] << endl;
+	cout << endl;
+	cout << "Inside of Genzo's house, you started helping him clean the sheriff's office, as this can go really messy." << endl;
+	cout << "As you embraced Nami, you realize that the family is in a financial situation." << endl;
+	cout << "The next time it came, both Nojiko and Nami have terrible fever, high taxes being paid for living, let alone being 100K Beli for an adult and 50K for children." << endl;
+	cout << endl;
+	printLine();
+	cout << endl;
+	pressKey();
+	clearLines();
+	cout << "Location: " << storySetting[0] << endl;
+	cout << endl;
+	cout << "Everything seemed fine for now, until a hostile enemy just arrived." << endl;
+	cout << "Arlong the Saw, a fishman who once lived in the Grandline, home of the strongest people in the planet." << endl;
+	cout << "One by one, the enemy pirates took everything in the village." << endl;
+	cout << endl;
+	printLine();
+	cout << endl;
+	pressKey();
+	clearLines();
+	cout << "Location: " << storySetting[0] << endl;
+	cout << endl;
+	cout << "You here the voices of the fishmen stating their demands:" << endl;
+	cout << endl;
+	cout << "Arlong: \"I came here to colonize this island. Pay tribute to me or BE EXECUTED.\"" << endl;
+	cout << endl;
+	cout << "Body after body, the corpses of the slain fell down their knees." << endl;
+	cout << "Bell-mere opens the door, only to be greeted by the fishermen alone." << endl;
+	cout << endl;
+	printLine();
+	cout << endl;
+	pressKey();
+	clearLines();
+	cout << "Location: " << storySetting[0] << endl;
+	cout << endl;
+	cout << "Bell-mere: \"I cannot pay you real money. How about my children?" << endl;
+	cout << endl;
+	cout << "But, he does not like people paying any money. He then takes out Bell-mere with one strike." << endl;
+	cout << "You can only watch as here body drops to the sand." << endl;
+	cout << endl;
+	cout << "Arlong: \"Children, huh? Pitiful.\"" << endl;
+	cout << "Keigan: Wait, wait, wait, wait a second, what happened?" << endl;
+	cout << "Arlong: \"GRRRRRAAAAHHHHH!!!\"" << endl;
+	cout << "Keigan: \"*gasps*, *stutters* B-B-B-Bell?\"" << endl;
+	cout << "Keigan: \"NOOOOOOOOOOOOOOOOO!!!!!\"" << endl;
 	cout << endl;
 	printLine();
 	cout << endl;
 	pressKey();
 	clearLines();
 }
+
+// Story Settings
+string storySetting[2] = {"Cocoyashi Village", "Polar Tang"}
 
 // Disclaimer
 void warningScreen() {
@@ -241,30 +288,6 @@ void exitGame() {
     }
 }
 
-// Game Paused
-void pauseGame() {
-    gamePaused = true;
-    while (gamePaused) {
-		cout << "----------------------------------------" << endl;
-	    cout << "|                                      |" << endl;
-	    cout << "|             Game Paused!             |" << endl;
-	    cout << "|                                      |" << endl;
-	    cout << "|         Press P to Continue.         |" << endl;
-	    cout << "|           Press Q to Quit.           |" << endl;
-	    cout << "|                                      |" << endl;
-	    cout << "----------------------------------------" << endl;
-	    pressChoice();
-	    if (choiceKey == 'q' || choiceKey == 'Q') {
-	    	clearKey();
-			exitGame();
-		}
-		else if (choiceKey == 'p' || choiceKey == 'P') {
-			clearKey();
-			gamePaused = false;
-		}
-	}
-}
-
 // Enter Name
 void enterName() {
 	cout << "Before you continue, we want to ask for your name." << endl;
@@ -316,6 +339,7 @@ int main() {
     }
     return 0;
 }
+
 
 
 
