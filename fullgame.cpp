@@ -63,22 +63,6 @@ int bossHP = 2500;
 int bossATK = 520;
 int bossEND = 600;
 
-// Dealing Boss Damage
-void dealBossDamage() {
-	bossDamage = ceil((playerATK - bossEND) / 2);
-	cout << "You deal " << bossDamage << " damage!" << endl;
-	bossHP -= bossDamage;
-	bossDamage = 0; // Reset Damage
-}
-
-// Taking Damage
-void dealPlayerDamage() {
-	playerDamage = ceil((bossATK - playerEND) / 2);
-	cout << "You take " << playerDamage << " damage!" << endl;
-	playerHP -= playerDamage;
-	playerDamage = 0; // Reset Damage
-}
-
 // The 8-Year Loop
 void loopTraining() {
 	for (int i = 1; i <= 48; i++) {
@@ -240,6 +224,7 @@ void chapter1() {
 
 void chapter2() {
 	cout << "Location: Jolly Roger" << endl;
+	cout << endl;
 }
 
 // Disclaimer
