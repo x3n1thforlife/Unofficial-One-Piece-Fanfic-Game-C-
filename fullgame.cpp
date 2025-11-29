@@ -10,7 +10,7 @@ using namespace std;
 
 // Universal Values
 bool continueGame = true;
-char choiceKey;
+int choiceKey;
 int bossDamage = 0;
 int playerDamage = 0;
 bool gate1Active = false;
@@ -18,7 +18,6 @@ bool gate2Active = false;
 bool gateMastery = false;
 bool playerInTurn = false;
 bool bossInTurn = false;
-
 
 // Clear Lines
 void clearLines() {
@@ -40,7 +39,7 @@ void printLine() {
 
 // Input Key
 void pressChoice() {
-    choiceKey = getch();
+    choiceKey = _getch();
 }
 
 // Clear Input Key
@@ -136,101 +135,99 @@ void loopTraining() {
 	}
 }
 
-// Player in Turn
-void playerTurn() {
-	playerInTurn = true;
-	while (playerInTurn) {
-		pressChoice();
-	}
-}
-
-// Activating the Gates
-void activateGates() {
-	if (playerEP >= 1.5 * 35) {
-		gate1Active = true;
-		cout << "Gate 1 Activated!" << endl;
-		cout << "Your attacks deal 1.8 more damage!" << endl;
-		cout << "Do you want to unlock Gate 2?" << endl;
-		cout << "Y for Yes, N for No" << endl;
-		pressChoice();
-		if (choiceKey == 'Y' || choiceKey == 'y') {
-			if (playerEP >= 1.5 * 45) {
-				gate2Active = true;
-				playerEP -= 45;
-				cout << "Gate 2 Activated!" << endl;
-				playerATK *= 2.2;
-				cout << "Both gates are active! Your attacks now deal 2.2 more damage!" << endl;
-				dealBossDamage();
-				gateMastery = true;
-			}
-			else {
-				cout << "You don't have enough Energy Points!" << endl;
-			}
-		}
-		else if (choiceKey == 'N' || choiceKey == 'n') {
-			playerEP -= 35;
-			playerATK *= 1.8;
-			dealBossDamage();
-		}
-		if (!gateMastery && playerEP < 7) {
-			playerATK /= 1.5;
-			playerEND /= 1.5;
-		}
-		else if (gateMastery && playerEP < 8) {
-			playerATK /= 1.4;
-			playerEND /= 1.4;
-		}
-		playerInTurn = false;
-	}
-	else {
-		cout << "You don't have enough Energy Points!" << endl;
-	}
-}
-
-// Boss Turn
-void bossTurn() {
-	if (bossHP <= 1600 && bossHP >= 901) {
-		bossATK = 550;
-	}
-	else if (bossHP >= 900 && bossHP >= 1) {
-		bossATK = 600;
-		bossEND = 660;
-	}
-	dealPlayerDamage();
-}
-
-// Max Constant Values
-void declareConstant() {
-	const int maxPlayerHP = playerHP;
-	const int maxBossHP = bossHP;
-	const int maxPlayerATK = playerATK;
-	const int maxPlayerEND = playerEND;
-	const int maxPlayerEP = playerEP;
-	const int maxBossATK = bossATK;
-	const int maxBossEND = bossEND;
-}
-
-// Story Arc 1
+// First Story Arc
 void chapter1() {
 	cout << endl;
-	cout << "Location: " << storySetting[0] << endl;
+	cout << "Location: Cocoyashi Village" << endl;
 	cout << endl;
 	cout << "The Cocoyashi Village is a place full of prosperity and peace in the world." << endl;
-	cout << "You lived there with your love, Nami." << endl;
-}
-
-// Story Settings
-string storySetting[2] = {"Cocoyashi Village", "Polar Tang"};
-
-// Player Information
-void playerInfo() {
+	cout << "There once lived a man named Keigan Lee, with his love, Nami." << endl;
+	cout << "He watched her draw her first map, and glance in front of her eyes." << endl;
 	cout << endl;
-	cout << "Full Name: Keigan Lee" << endl;
-	cout << "Nickname: Kei (only by the locals)" << endl;
-	cout << "Age: 18" << endl;
-	cout << "Epithet: Jet" << endl;
-	cout << "Power Ranking: 3rd (behind Zoro and front of Sanji)" << endl;
-	cout << "Crew Position: Shinobi, Accountant" << endl;
+	printLine();
+	cout << endl;
+	pressKey();
+	clearLines();
+	cout << "Location: Cocoyashi Village" << endl;
+	cout << endl;
+	cout << "One of Keigan\'s best friends, Bell-mere, checking the budget and price of her delicious mikans." << endl;
+	cout << "When things get really rough, Keigan cooks extra tasty dishes inside her household, making Bell-mere eat this instead of mikans." << endl;
+	cout << "The low demand for mikan lasted for months, as time passes by." << endl;
+	cout << endl;
+	printLine();
+	cout << endl;
+	pressKey();
+	clearLines();
+	cout << "Location: Cocoyashi Village" << endl;
+	cout << endl;
+	cout << "Inside of Genzo's house, Keigan started helping him clean the sheriff's office, as this can go really messy." << endl;
+	cout << "As Keigan embraced Nami, he realizes that the family is in a financial situation." << endl;
+	cout << "The next time it came, both Nojiko and Nami have terrible fever, high taxes being paid for living, let alone being 100K Beli for an adult and 50K for children." << endl;
+	cout << endl;
+	printLine();
+	cout << endl;
+	clearLines();
+	cout << "Location: Cocoyashi Village" << endl;
+	cout << endl;
+	cout << "Everything seemed fine for now, until a hostile enemy just arrived." << endl;
+	cout << "Arlong the Saw, a fishman who once lived in the Grandline, home of the strongest people in the planet." << endl;
+	cout << "One by one, the enemy pirates took everything in the village." << endl;
+	cout << endl;
+	printLine();
+	cout << endl;
+	pressKey();
+	clearLines();
+	cout << "Location: Cocoyashi Village" << endl;
+	cout << endl;
+	cout << "Keigan hears the voices of the fishmen stating their demands:" << endl;
+	cout << endl;
+	cout << "Arlong: \"I came here to colonize this island. Pay tribute to me or BE EXECUTED.\"" << endl;
+	cout << endl;
+	cout << "Body after body, the corpses of the slain fell down their knees." << endl;
+	cout << "Bell-mere opens the door, only to be greeted by the fishermen alone." << endl;
+	cout << endl;
+	printLine();
+	cout << endl;
+	pressKey();
+	clearLines();
+	cout << "Location: Cocoyashi Village" << endl;
+	cout << endl;
+	cout << "Bell-mere: \"I cannot pay you real money. How about my children?" << endl;
+	cout << endl;
+	cout << "But, he does not like people paying any money. He then takes out Bell-mere with one strike." << endl;
+	cout << "Keigan can only watch as here body drops to the sand." << endl;
+	cout << endl;
+	cout << "Arlong: \"Children, huh? Pitiful.\"" << endl;
+	cout << "Keigan: Wait, wait, wait, wait a second, what happened?" << endl;
+	cout << "Arlong: \"GRRRRRAAAAHHHHH!!!\"" << endl;
+	cout << "Keigan: \"*gasps*, *stutters* B-B-B-Bell-mere?\"" << endl;
+	cout << "Keigan: \"NOOOOOOOOOOOOOOOOO!!!!!\"" << endl;
+	cout << endl;
+	printLine();
+	cout << endl;
+	pressKey();
+	clearLines();
+	cout << "Location: Cocoyashi Village" << endl;
+	cout << endl;
+	cout << "Girls: \"Bell-mere!\"" << endl;
+	cout << endl;
+	cout << "The girls weep on Bell-mere, shot to the body." << endl;
+	cout << "Meanwhile, Keigan attempts to wound Arlong by throwing a punch at him." << endl;
+	cout << endl;
+	cout << "Keigan: \"You\'ll pay for this!\"" << endl;
+	cout << "Arlong: \"You wanna try hitting me? Ha! Prove it.\"" << endl;
+	cout << endl;
+	cout << "Keigan: \"*throws a punch at him* HIIIYYYAAAAAHHHH!!!\"" << endl;
+	cout << "Arlong: \"*takes the hit unfazed HMMM. Is this all you got?\"" << endl;
+	cout << "Arlong: \"Take this! *smashes Keigan to the shore*\"" << endl;
+	cout << endl;
+	printLine();
+	cout << endl;
+	pressKey();
+	clearLines();
+	cout << "Location: Cocoyashi Village" << endl;
+	cout << endl;
+	cout << "Arlong: \"Let me call upon you the people of this village: The weak shall belong to the deep.\"" << endl;
 	cout << endl;
 	cout << "Keigan is thrown to the ocean. Everyone else became hostage for the Fishman Captain." << endl;
 	cout << "There is still hope for the faithful of Cocoyashi Village. Keigan's unconcious body still floating until it reached someone\'s ship." << endl;
@@ -241,8 +238,9 @@ void playerInfo() {
 	clearLines();
 }
 
-// Story Settings
-string storySetting[2] = {"Cocoyashi Village", "Polar Tang"};
+void chapter2() {
+	cout << "Location: Jolly Roger" << endl;
+}
 
 // Disclaimer
 void warningScreen() {
